@@ -1,0 +1,17 @@
+---
+- name: "Fail if OS/Architecture is not supported"
+  fail:
+    msg: "Installing apt-transport-https on {{ (ansible_os_family | lower) + '_' + (ansible_architecture | lower) }} is unsupported."
+  when:
+    - "(install_apt_transport_https_packages | default({}))[(ansible_os_family | lower) + '_' + (ansible_architecture | lower)] is not defined"
+    - "apt_transport_https is defined"
+  tags:
+    - "apt-transport-https"
+- name: "Install apt-transport-https"
+  package:
+    pkg: "{{ install_apt_transport_https_packages[(ansible_os_family | lower) + '_' + (ansible_architecture | lower)] }}"
+    state: "present"
+  when:
+    - "apt_transport_https is defined"
+  tags:
+    - "apt-transport-https"
