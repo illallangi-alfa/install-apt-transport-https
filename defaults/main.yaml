@@ -1,5 +1,5 @@
 ---
-install_iptables_legacy_packages:
+install_apt_transport_https_packages:
   centos: &centos
   raspbian: &raspbian
     - "apt-transport-https"
