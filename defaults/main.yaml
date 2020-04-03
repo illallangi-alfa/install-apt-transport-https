@@ -1,5 +1,6 @@
 ---
 install_apt_transport_https_packages:
-  debian_armv7l:
+  debian: &debian
     - "apt-transport-https"
-  redhat_x86_64: []
+  debian_armv7l: *debian
+  debian_x86_64: *debian
